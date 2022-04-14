@@ -4,7 +4,7 @@ Welcome to the Grade Air Case
 
 This boilerplate project will help you out with the basic configurations of your server. But before we're able to use it, we'll have to make sure we have the right environments and dependencies installed on our device.
 
-Clone this repository by running '`$ git clone https://github.com/Grade-Arc/Grade-Air-Case`' in a terminal of choice.
+Clone this repository by running '`$ git clone https://github.com/Grade-Arc/Grade-Air-Case-Backend`' in a terminal of choice.
 
 ## Installation
 
