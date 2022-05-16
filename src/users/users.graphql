@@ -1,11 +1,14 @@
+scalar DateTime
+
 type User {
-  # Example field (placeholder)
-  exampleField: Int
+  id: Int!
+  name: String!
+  createdAt: DateTime
 }
 
 input CreateUserInput {
-  # Example field (placeholder)
-  exampleField: Int
+  name: String!
+  createdAt: DateTime
 }
 
 input UpdateUserInput {
