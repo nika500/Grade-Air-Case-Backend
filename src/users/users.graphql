@@ -3,11 +3,13 @@ scalar DateTime
 type User {
   id: Int!
   name: String!
+  email: String
   createdAt: DateTime
 }
 
 input CreateUserInput {
   name: String!
+  email: String
   createdAt: DateTime
 }
 
