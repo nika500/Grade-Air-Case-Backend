@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AppService } from './app.service';
       plugins: [ApolloServerPluginLandingPageLocalDefault],
       typePaths: ['./**/*.graphql'],
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
