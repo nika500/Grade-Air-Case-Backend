@@ -1,0 +1,30 @@
+type Plane {
+  # Example field (placeholder)
+  id: Int!
+  name: String!
+  departure_time: DateTime
+  arrival_time: DateTime
+  departure_airport: String
+  arrival_airport: String
+  tickets: [PlaneTicket!]
+}
+
+input CreatePlaneInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdatePlaneInput {
+  id: Int!
+}
+
+type Query {
+  planes: [Plane]!
+  plane(id: Int!): Plane
+}
+
+type Mutation {
+  createPlane(createPlaneInput: CreatePlaneInput!): Plane!
+  updatePlane(updatePlaneInput: UpdatePlaneInput!): Plane!
+  removePlane(id: Int!): Plane
+}

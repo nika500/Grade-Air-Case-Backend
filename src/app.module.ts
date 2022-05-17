@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { GraphQLDateTime } from 'graphql-iso-date';
+import { PlanesModule } from './planes/planes.module';
+import { PlaneTicketsModule } from './plane-tickets/plane-tickets.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { GraphQLDateTime } from 'graphql-iso-date';
       resolvers: { DateTime: GraphQLDateTime },
     }),
     UsersModule,
+    PlanesModule,
+    PlaneTicketsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

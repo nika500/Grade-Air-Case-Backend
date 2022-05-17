@@ -1,0 +1,32 @@
+scalar DateTime
+
+type PlaneTicket {
+  id: Int!
+  price: Int!
+  ownerId: Int!
+  owner: User!
+  planeId: Int!
+  plane: Plane!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CreatePlaneTicketInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdatePlaneTicketInput {
+  id: Int!
+}
+
+type Query {
+  planeTickets: [PlaneTicket]!
+  planeTicket(id: Int!): PlaneTicket
+}
+
+type Mutation {
+  createPlaneTicket(createPlaneTicketInput: CreatePlaneTicketInput!): PlaneTicket!
+  updatePlaneTicket(updatePlaneTicketInput: UpdatePlaneTicketInput!): PlaneTicket!
+  removePlaneTicket(id: Int!): PlaneTicket
+}

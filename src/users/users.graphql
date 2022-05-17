@@ -2,9 +2,13 @@ scalar DateTime
 
 type User {
   id: Int!
-  name: String!
+  username: String!
+  firstname: String!
+  lastname: String!
   email: String
+  planeTicket: PlaneTicket
   createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input CreateUserInput {
