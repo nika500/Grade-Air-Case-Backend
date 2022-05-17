@@ -18,10 +18,36 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
+  username    String
   /// @Validator.IsAlpha()
-  name      String
+  firstname   String
+  /// @Validator.IsAlpha()
+  lastname    String
   /// @Validator.IsEmail()
-  email     String?
+  email       String?
+  planeTicket PlaneTicket?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+model Plane {
+  id                Int           @id @default(autoincrement())
+  name              String
+  departure_time    DateTime?
+  arrival_time      DateTime?
+  departure_airport String?
+  arrival_airport   String?
+  PlaneTicket       PlaneTicket[]
+}
+
+model PlaneTicket {
+  id        Int      @id @default(autoincrement())
+  price     Int
+  ownerId   Int      @unique
+  owner     User     @relation(fields: [ownerId], references: [id])
+  planeId   Int
+  plane     Plane    @relation(fields: [planeId], references: [id])
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }

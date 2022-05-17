@@ -4,16 +4,52 @@ const prisma = new PrismaClient();
 
 const userData: UserCreateInput[] = [
   {
-    name: 'Nika',
+    username: 'n100',
+    firstname: 'Nika',
+    lastname: 'Pruidze',
     email: 'np@np.com',
+    planeTicket: {
+      create: {
+        price: 10,
+        plane: {
+          create: {
+            name: 'plane_name_X',
+          },
+        },
+      },
+    },
   },
   {
-    name: 'Alice',
-    email: 'alice@gmail.com',
+    username: 'john_Doe',
+    firstname: 'John',
+    lastname: 'Doe',
+    email: 'john@doe.com',
+    planeTicket: {
+      create: {
+        price: 20,
+        plane: {
+          create: {
+            name: 'plane_name_Y',
+          },
+        },
+      },
+    },
   },
   {
-    name: 'John',
-    email: 'john.doe@gmail.com',
+    username: 'Jane_Doe',
+    firstname: 'Jane',
+    lastname: 'Doe',
+    email: 'Jane@doe.com',
+    planeTicket: {
+      create: {
+        price: 30,
+        plane: {
+          create: {
+            name: 'plane_name_Z',
+          },
+        },
+      },
+    },
   },
 ];
 
