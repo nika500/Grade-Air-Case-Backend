@@ -7,11 +7,11 @@ export class UserUpdateInput extends UpdateUserInput {
 
   @IsAlpha()
   @IsOptional()
-  firstname: string;
+  firstname?: string;
 
   @IsAlpha()
   @IsOptional()
-  lastname: string;
+  lastname?: string;
 
   @IsEmail()
   @IsOptional()
