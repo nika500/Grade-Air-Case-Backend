@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import { UserCreateInput } from '../src/@generated/prisma-nestjs-graphql/user/user-create.input';
+import { Prisma, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const userData: UserCreateInput[] = [
+const userData: Prisma.UserCreateInput[] = [
   {
     username: 'n100',
     firstname: 'Nika',
@@ -56,7 +55,7 @@ const userData: UserCreateInput[] = [
 async function main() {
   console.log('Start seeding...');
 
-  await prisma.user.deleteMany();
+  // await prisma.user.deleteMany();
 
   for (const u of userData) {
     const user = await prisma.user.create({
