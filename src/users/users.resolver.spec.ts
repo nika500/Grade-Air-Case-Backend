@@ -1,19 +1,41 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from '../graphql';
 import { PrismaService } from '../../prisma/prisma.service';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
+import { UserCreateInput } from './dto/create-user.input';
+import { UserUpdateInput } from './dto/update-user.input';
 
 describe('UsersResolver', () => {
   let resolver: UsersResolver;
 
+  const mockedUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    username: 'JD123',
+    email: 'john@doe.com',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
   const mockUsersService = {
-    create: jest.fn().mockImplementation((dto) => {
+    create: jest.fn().mockImplementation((input: UserCreateInput) => {
       return {
-        id: Date.now(),
-        ...dto,
+        id: 10,
+        ...input,
       };
     }),
-    update: jest.fn().mockImplementation((dto) => dto),
+    update: jest.fn().mockImplementation((input: UserUpdateInput) => input),
+    findOne: jest.fn().mockImplementation((id: { id: number }) => ({
+      ...mockedUser,
+      ...id,
+    })),
+    findAll: jest.fn().mockImplementation(() => [
+      {
+        ...mockedUser,
+        id: 1,
+      },
+    ]),
   };
 
   beforeEach(async () => {
@@ -31,29 +53,43 @@ describe('UsersResolver', () => {
     expect(resolver).toBeDefined();
   });
 
-  it('should create a user', () => {
-    const input = {
-      firstname: 'John',
-      lastname: 'Doe',
-      username: 'JD123',
-      email: 'john@doe.com',
-    };
-    expect(resolver.create(input)).toEqual({
-      id: expect.any(Number),
-      ...input,
+  describe('createUser', () => {
+    it('should create a user', () => {
+      expect(resolver.create(mockedUser)).toEqual({
+        id: 10,
+        ...mockedUser,
+      });
     });
   });
 
-  it('should update a user', () => {
-    const input = { id: 1, username: 'JD500' };
+  describe('updateUser', () => {
+    it('should update a user', () => {
+      const input = { id: 1, username: 'JD500' };
 
-    // expect(resolver.update(input)).to({
-    //   id: 1,
-    //   ...input,
-    // });
-    expect(resolver.update(input)).objectContaining({
-      id: expect(1),
-      username: expect('JD'),
+      expect(resolver.update(input)).toEqual({
+        id: 1,
+        ...input,
+      });
+    });
+  });
+
+  describe('findOne', () => {
+    it('should get one user', () => {
+      expect(resolver.findOne(100)).toEqual({
+        ...mockedUser,
+        id: 100,
+      });
+    });
+  });
+
+  describe('findAll', () => {
+    it('should get all users', () => {
+      expect(resolver.findAll()).toEqual([
+        {
+          ...mockedUser,
+          id: 1,
+        },
+      ]);
     });
   });
 });
