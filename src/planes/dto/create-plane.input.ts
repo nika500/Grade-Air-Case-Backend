@@ -1,5 +1,5 @@
 import { IsAlpha } from 'class-validator';
-import { Plane } from 'src/graphql';
+import { Plane } from '../../graphql';
 
 export class CreatePlaneInput extends Plane {
   @IsAlpha()

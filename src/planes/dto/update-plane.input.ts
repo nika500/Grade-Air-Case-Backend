@@ -1,5 +1,5 @@
 import { IsAlpha, IsNumber, IsOptional } from 'class-validator';
-import { Plane } from 'src/graphql';
+import { Plane } from '../../graphql';
 
 export class UpdatePlaneInput extends Plane {
   @IsNumber()

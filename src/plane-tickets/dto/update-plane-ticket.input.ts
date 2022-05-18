@@ -1,4 +1,4 @@
-import { PlaneTicket } from 'src/graphql';
+import { PlaneTicket } from '../../graphql';
 import { IsNumber, IsPositive } from 'class-validator';
 
 export class UpdatePlaneTicketInput extends PlaneTicket {

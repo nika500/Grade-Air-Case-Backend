@@ -1,9 +1,7 @@
-import { CreateUserInput } from './create-user.input';
-import { PartialType } from '@nestjs/mapped-types';
 import { IsAlpha, IsEmail, IsNumber, IsOptional } from 'class-validator';
-import { User } from '../../graphql';
+import { UpdateUserInput } from '../../graphql';
 
-export class UpdateUserInput extends User {
+export class UserUpdateInput extends UpdateUserInput {
   @IsNumber()
   id: number;
 

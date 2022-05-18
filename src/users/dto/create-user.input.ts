@@ -1,7 +1,7 @@
 import { IsAlpha, IsEmail, IsOptional, Length } from 'class-validator';
-import { User } from 'src/graphql';
+import { CreateUserInput } from '../../graphql';
 
-export class CreateUserInput extends User {
+export class UserCreateInput extends CreateUserInput {
   @Length(3, 20)
   username: string;
 

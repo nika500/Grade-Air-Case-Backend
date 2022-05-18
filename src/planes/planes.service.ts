@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from 'prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreatePlaneInput } from './dto/create-plane.input';
 import { UpdatePlaneInput } from './dto/update-plane.input';
 

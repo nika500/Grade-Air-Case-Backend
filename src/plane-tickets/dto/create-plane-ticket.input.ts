@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { IsNumber, IsPositive } from 'class-validator';
-import { PlaneTicket } from 'src/graphql';
+import { PlaneTicket } from '../../graphql';
 
 export class CreatePlaneTicketInput extends PlaneTicket {
   @IsNumber()
