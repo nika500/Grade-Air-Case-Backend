@@ -4,20 +4,24 @@ type PlaneTicket {
   id: Int!
   price: Int!
   ownerId: Int!
-  owner: User!
+  owner: User
   planeId: Int!
-  plane: Plane!
+  plane: Plane
   createdAt: DateTime!
   updatedAt: DateTime!
 }
 
 input CreatePlaneTicketInput {
-  # Example field (placeholder)
-  exampleField: Int
+  price: Int!
+  ownerId: Int!
+  planeId: Int!
 }
 
 input UpdatePlaneTicketInput {
   id: Int!
+  price: Int
+  ownerId: Int
+  planeId: Int
 }
 
 type Query {
@@ -26,7 +30,11 @@ type Query {
 }
 
 type Mutation {
-  createPlaneTicket(createPlaneTicketInput: CreatePlaneTicketInput!): PlaneTicket!
-  updatePlaneTicket(updatePlaneTicketInput: UpdatePlaneTicketInput!): PlaneTicket!
+  createPlaneTicket(
+    createPlaneTicketInput: CreatePlaneTicketInput!
+  ): PlaneTicket!
+  updatePlaneTicket(
+    updatePlaneTicketInput: UpdatePlaneTicketInput!
+  ): PlaneTicket!
   removePlaneTicket(id: Int!): PlaneTicket
 }

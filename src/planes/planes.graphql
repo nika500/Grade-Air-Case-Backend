@@ -10,12 +10,20 @@ type Plane {
 }
 
 input CreatePlaneInput {
-  # Example field (placeholder)
-  exampleField: Int
+  name: String!
+  departure_time: DateTime
+  arrival_time: DateTime
+  departure_airport: String
+  arrival_airport: String
 }
 
 input UpdatePlaneInput {
   id: Int!
+  name: String
+  departure_time: DateTime
+  arrival_time: DateTime
+  departure_airport: String
+  arrival_airport: String
 }
 
 type Query {

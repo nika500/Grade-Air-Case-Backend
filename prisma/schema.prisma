@@ -5,12 +5,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator nestgraphql {
-  provider               = "node node_modules/prisma-nestjs-graphql"
-  output                 = "../src/@generated/prisma-nestjs-graphql"
-  fields_Validator_from  = "class-validator"
-  fields_Validator_input = true
-}
+// generator nestgraphql {
+//   provider               = "node node_modules/prisma-nestjs-graphql"
+//   output                 = "../src/@generated/prisma-nestjs-graphql"
+//   fields_Validator_from  = "class-validator"
+//   fields_Validator_input = true
+// }
 
 datasource db {
   provider = "sqlite"
@@ -20,11 +20,8 @@ datasource db {
 model User {
   id          Int          @id @default(autoincrement())
   username    String
-  /// @Validator.IsAlpha()
   firstname   String
-  /// @Validator.IsAlpha()
   lastname    String
-  /// @Validator.IsEmail()
   email       String?
   planeTicket PlaneTicket?
   createdAt   DateTime     @default(now())
@@ -45,9 +42,9 @@ model PlaneTicket {
   id        Int      @id @default(autoincrement())
   price     Int
   ownerId   Int      @unique
-  owner     User     @relation(fields: [ownerId], references: [id])
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   planeId   Int
-  plane     Plane    @relation(fields: [planeId], references: [id])
+  plane     Plane    @relation(fields: [planeId], references: [id], onDelete: SetNull)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

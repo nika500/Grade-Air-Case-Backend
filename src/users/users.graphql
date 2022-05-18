@@ -2,9 +2,9 @@ scalar DateTime
 
 type User {
   id: Int!
-  username: String!
   firstname: String!
   lastname: String!
+  username: String!
   email: String
   planeTicket: PlaneTicket
   createdAt: DateTime
@@ -12,13 +12,18 @@ type User {
 }
 
 input CreateUserInput {
-  name: String!
+  firstname: String!
+  lastname: String!
+  username: String!
   email: String
-  createdAt: DateTime
 }
 
 input UpdateUserInput {
   id: Int!
+  firstname: String
+  lastname: String
+  username: String
+  email: String
 }
 
 type Query {
