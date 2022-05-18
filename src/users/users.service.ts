@@ -1,37 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  create(createUserInput: Prisma.UserCreateInput) {
-    return this.prisma.user.create({
+  async create(createUserInput: CreateUserInput) {
+    return await this.prisma.user.create({
       data: createUserInput,
     });
   }
 
   async findAll() {
-    return this.prisma.user.findMany();
-  }
-
-  findOne(userWhereUniqueInput: Prisma.UserWhereUniqueInput) {
-    return this.prisma.user.findUnique({
-      where: userWhereUniqueInput,
+    return await this.prisma.user.findMany({
+      include: {
+        planeTicket: true,
+      },
     });
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async findOne(userWhereUniqueInput: Prisma.UserWhereUniqueInput) {
+    return await this.prisma.user.findUnique({
+      where: userWhereUniqueInput,
+      include: {
+        planeTicket: true,
+      },
+    });
   }
 
-  remove(id: number) {
-    return this.prisma.user.delete({
+  async update(updateUserInput: UpdateUserInput) {
+    const { id } = updateUserInput;
+    return await this.prisma.user.update({
       where: {
         id: id,
       },
+      include: {
+        planeTicket: true,
+      },
+      data: updateUserInput,
+    });
+  }
+
+  async remove(userWhereUniqueInput: Prisma.UserWhereUniqueInput) {
+    return await this.prisma.user.delete({
+      where: userWhereUniqueInput,
     });
   }
 }
