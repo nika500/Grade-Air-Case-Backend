@@ -1,6 +1,10 @@
-import { CreatePlaneTicketInput } from './create-plane-ticket.input';
-import { PartialType } from '@nestjs/mapped-types';
+import { PlaneTicket } from 'src/graphql';
+import { IsNumber, IsPositive } from 'class-validator';
 
-export class UpdatePlaneTicketInput extends PartialType(CreatePlaneTicketInput) {
+export class UpdatePlaneTicketInput extends PlaneTicket {
+  @IsNumber()
   id: number;
+
+  @IsPositive()
+  price: number;
 }

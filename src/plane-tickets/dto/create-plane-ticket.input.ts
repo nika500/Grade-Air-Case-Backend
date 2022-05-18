@@ -1,1 +1,15 @@
-export class CreatePlaneTicketInput {}
+import { Prisma } from '@prisma/client';
+import { IsNumber, IsPositive } from 'class-validator';
+import { PlaneTicket } from 'src/graphql';
+
+export class CreatePlaneTicketInput extends PlaneTicket {
+  @IsNumber()
+  @IsPositive()
+  price: number;
+
+  @IsNumber()
+  ownerId: number;
+
+  @IsNumber()
+  planeId: number;
+}

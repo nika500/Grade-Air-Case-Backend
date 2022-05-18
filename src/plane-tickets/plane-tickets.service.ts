@@ -1,28 +1,56 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
-import { CreatePlaneTicketInput } from './dto/create-plane-ticket.input';
-import { UpdatePlaneTicketInput } from './dto/update-plane-ticket.input';
+import { UpdatePlaneTicketInput } from '../graphql';
+import { CreatePlaneTicketInput } from '../graphql';
 
 @Injectable()
 export class PlaneTicketsService {
   constructor(private prisma: PrismaService) {}
-  create(createPlaneTicketInput: CreatePlaneTicketInput) {
-    return 'This action adds a new planeTicket';
+
+  async create(createPlaneTicketInput: CreatePlaneTicketInput) {
+    return await this.prisma.planeTicket.create({
+      data: createPlaneTicketInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all planeTickets`;
+  async findAll() {
+    return await this.prisma.planeTicket.findMany({
+      include: {
+        plane: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} planeTicket`;
+  async findOne(
+    planeTicketsWhereUniqueInput: Prisma.PlaneTicketWhereUniqueInput,
+  ) {
+    return await this.prisma.planeTicket.findUnique({
+      where: planeTicketsWhereUniqueInput,
+      include: {
+        plane: true,
+      },
+    });
   }
 
-  update(id: number, updatePlaneTicketInput: UpdatePlaneTicketInput) {
-    return `This action updates a #${id} planeTicket`;
+  async update(updatePlaneTicketInput: UpdatePlaneTicketInput) {
+    const { id } = updatePlaneTicketInput;
+    return await this.prisma.planeTicket.update({
+      where: {
+        id: id,
+      },
+      include: {
+        plane: true,
+      },
+      data: updatePlaneTicketInput,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} planeTicket`;
+  async remove(
+    planeTicketWhereUniqueInput: Prisma.PlaneTicketWhereUniqueInput,
+  ) {
+    return await this.prisma.planeTicket.delete({
+      where: planeTicketWhereUniqueInput,
+    });
   }
 }
