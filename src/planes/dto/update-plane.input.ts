@@ -1,6 +1,11 @@
-import { CreatePlaneInput } from './create-plane.input';
-import { PartialType } from '@nestjs/mapped-types';
+import { IsAlpha, IsNumber, IsOptional } from 'class-validator';
+import { Plane } from 'src/graphql';
 
-export class UpdatePlaneInput extends PartialType(CreatePlaneInput) {
+export class UpdatePlaneInput extends Plane {
+  @IsNumber()
   id: number;
+
+  @IsAlpha()
+  @IsOptional()
+  name: string;
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePlaneInput } from './dto/create-plane.input';
 import { UpdatePlaneInput } from './dto/update-plane.input';
@@ -7,23 +8,45 @@ import { UpdatePlaneInput } from './dto/update-plane.input';
 export class PlanesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createPlaneInput: CreatePlaneInput) {
-    return 'This action adds a new plane';
+  async create(createPlaneInput: CreatePlaneInput) {
+    return await this.prisma.plane.create({
+      data: createPlaneInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all planes`;
+  async findAll() {
+    return await this.prisma.plane.findMany({
+      include: {
+        PlaneTicket: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} plane`;
+  async findOne(planeWhereUniqueInput: Prisma.PlaneWhereUniqueInput) {
+    return await this.prisma.plane.findUnique({
+      where: planeWhereUniqueInput,
+      include: {
+        PlaneTicket: true,
+      },
+    });
   }
 
-  update(id: number, updatePlaneInput: UpdatePlaneInput) {
-    return `This action updates a #${id} plane`;
+  async update(updatePlaneInput: UpdatePlaneInput) {
+    const { id } = updatePlaneInput;
+    return await this.prisma.plane.update({
+      where: {
+        id: id,
+      },
+      include: {
+        PlaneTicket: true,
+      },
+      data: updatePlaneInput,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} plane`;
+  async remove(planeWhereUniqueInput: Prisma.PlaneWhereUniqueInput) {
+    return await this.prisma.plane.delete({
+      where: planeWhereUniqueInput,
+    });
   }
 }
